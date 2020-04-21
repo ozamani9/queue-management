@@ -35,7 +35,7 @@
     "moment": "^2.24.0",
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.23",
-    "popper.js": "1.15.0",
+    "popper.js": "^1.15.0",
     "rrule": "^2.6.2",
     "socket.io-client": "2.2.0",
     "uuid": "3.3.3",
