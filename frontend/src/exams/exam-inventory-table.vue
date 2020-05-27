@@ -368,7 +368,7 @@
                   <b-dropdown-item size="sm"
                                    v-if="row.item.offsite_location"
                                    @click="editGroupBooking(row.item)">
-                    {{ checkInvigilator(row.item) ? 'Update Booking' : 'Add Invigilator' }}
+                    {{ checkInvigilator(row.item) ? 'Update Booking' : 'Edit/Print/Add Invigilator' }}
                   </b-dropdown-item>
                 </template>
 
@@ -383,14 +383,14 @@
                     <b-dropdown-item size="sm"
                                      v-if="row.item.offsite_location"
                                      @click="editGroupBooking(row.item)">
-                      {{ checkInvigilator(row.item) ? 'Update Booking' : 'Add Invigilator' }}
+                      {{ checkInvigilator(row.item) ? 'Update Booking' : 'Edit/Print/Add Invigilator' }}
                     </b-dropdown-item>
                   </template>
                   <template template v-if="!row.item.offsite_location">
                     <b-dropdown-item size="sm"
                                      v-if="row.item.booking && Object.keys(row.item.booking).length > 0"
                                      @click="updateCalendarBooking(row.item)">
-                      {{ checkInvigilator(row.item) ? 'Update Booking' : 'Add Invigilator' }}</b-dropdown-item>
+                      {{ checkInvigilator(row.item) ? 'Update Booking' : 'Edit/Print/Add Invigilator' }}</b-dropdown-item>
                     <b-dropdown-item size="sm"
                                      v-if="!row.item.booking || Object.keys(row.item.booking).length === 0"
                                      @click="addCalendarBooking(row.item)">Schedule Exam</b-dropdown-item>
@@ -399,7 +399,7 @@
 
                 <!--  These options always allowed if editing an exam for the office you're in.  -->
                 <b-dropdown-item size="sm"
-                                 @click="editExamDetails(row.item)">Edit Exam Details</b-dropdown-item>
+                                 @click="editExamDetails(row.item)">Print/Edit Exam Details</b-dropdown-item>
                 <b-dropdown-item size="sm"
                                  @click="returnExam(row.item)">Return Exam</b-dropdown-item>
               </template>
