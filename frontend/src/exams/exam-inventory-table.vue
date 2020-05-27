@@ -242,7 +242,7 @@
           <span v-if="!row.item.booking">
             -
           </span>
-          <span v-else-if="checkStartDate(row.item.booking.start_time)"
+          <span v-else-if="checkStartDate(row.item.booking.start_time,row.item.exam_returned_date)"
                 class="expired">
             {{ formatDate(row.item.booking.start_time) }}
           </span>
@@ -261,7 +261,7 @@
           <span v-else-if="row.item.exam_type.group_exam_ind && !checkExpiryDate(row.item.expiry_date)">
             –
           </span>
-          <span v-else-if="checkExpiryDate(row.item.expiry_date)"
+          <span v-else-if="checkExpiryDateClass(row.item.expiry_date,row.item.exam_returned_date)"
                 class="expired">
             {{ formatDate(row.item.expiry_date) }}
           </span>
@@ -883,8 +883,14 @@
         }
         return false
       },
-      checkStartDate(date){
-        if(moment(date).isValid() && moment(date).isBefore(moment(), 'day')){
+      checkExpiryDateClass(date, rdate){
+        if(moment(date).isValid() && moment(date).isBefore(moment(), 'day') && !rdate){
+          return true
+        }
+        return false
+      },
+      checkStartDate(date,rdate){
+        if(moment(date).isValid() && moment(date).isBefore(moment(), 'day') && !rdate){
           return true
         }
         return false
