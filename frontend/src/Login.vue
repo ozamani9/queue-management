@@ -155,7 +155,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
                 token: sessionStorage.getItem('token'),
                 tokenExp: sessionStorage.getItem('tokenExp')
             })
-            .success( () => {
+            .then( () => {
 
               //Set a timer to auto-refresh the token
               setInterval(() => {
@@ -164,7 +164,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
               this.setTokenToSessionStorage()
               this.$store.commit('setBearer', sessionStorage.getItem('token'))
             })
-            .error( () => {
+            .catch( () => {
               this.init()
             })
           } else {
