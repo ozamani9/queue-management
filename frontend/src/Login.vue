@@ -155,7 +155,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
                 token: sessionStorage.getItem('token'),
                 tokenExp: sessionStorage.getItem('tokenExp')
             })
-            .success( () => {
+            .then( () => {
 
               //Set a timer to auto-refresh the token
               setInterval(() => {
@@ -164,7 +164,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
               this.setTokenToSessionStorage()
               this.$store.commit('setBearer', sessionStorage.getItem('token'))
             })
-            .error( () => {
+            .catch( () => {
               this.init()
             })
           } else {
@@ -180,7 +180,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
             responseMode: 'fragment',
             flow: 'standard'
           }
-        ).success( () => {
+        ).then( () => {
           setInterval(() => {
             this.refreshToken(process.env.REFRESH_TOKEN_SECONDS_LEFT);
             }, 60*1000)
@@ -262,7 +262,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
       refreshToken(minValidity) {
         let secondsLeft = Math.round(this.$keycloak.tokenParsed.exp + this.$keycloak.timeSkew - new Date().getTime() / 1000)
         console.log('==> Updating token.  Currently valid for ' + secondsLeft + ' seconds')
-        this.$keycloak.updateToken(minValidity).success(refreshed => {
+        this.$keycloak.updateToken(minValidity).then(refreshed => {
           if (refreshed) {
             console.log("Token refreshed and is below")
             console.log(this.$keycloak.tokenParsed)
@@ -273,7 +273,7 @@ import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
           }
           let secondsLeft = Math.round(this.$keycloak.tokenParsed.exp + this.$keycloak.timeSkew - new Date().getTime() / 1000)
           console.log('    --> After refresh.  Token now valid for ' + secondsLeft + ' seconds')
-        }).error( (error) => {
+        }).catch( (error) => {
           console.log('Failed to refresh token')
           console.log(error)
           let secondsLeft = Math.round(this.$keycloak.tokenParsed.exp + this.$keycloak.timeSkew - new Date().getTime() / 1000)
