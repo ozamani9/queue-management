@@ -53,11 +53,11 @@ class CitizenFinishService(Resource):
 
         active_sr_id = active_service_request.sr_id
         active_service_request.finish_service(csr, self.clear_comments_flag)
-        citizen_state = CitizenState.query.filter_by(cs_state_name="Received Services").first()
-        citizen.cs_id = citizen_state.cs_id
+        #citizen_state = CitizenState.query.filter_by(cs_state_name="Received Services").first()
+        citizen.cs_id = active_id
 
-        pending_service_state = SRState.get_state_by_name("Complete")
-        active_service_request.sr_state_id = pending_service_state.sr_state_id
+        #pending_service_state = SRState.get_state_by_name("Complete")
+        active_service_request.sr_state_id = srstate_id
 
         db.session.add(citizen)
         db.session.commit()
@@ -76,3 +76,12 @@ class CitizenFinishService(Resource):
 
         return {'citizen': result.data,
                 'errors': result.errors}, 200
+try:
+    citizen_state = CitizenState.query.filter_by(cs_state_name="Received Services").first()
+    active_id = citizen_state.cs_id
+    pending_service_state = SRState.get_state_by_name("Complete")
+    srstate_id = pending_service_state.sr_state_id
+except:
+    active_id = 1
+    print("==> In smartboard.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")

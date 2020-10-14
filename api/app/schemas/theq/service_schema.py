@@ -25,7 +25,7 @@ class ServiceSchema(ma.SQLAlchemySchema):
         include_relationships = True
         load_instance = True
         jit = toastedmarshmallow.Jit
-        include_fk = True
+        #include_fk = True
         #exclude = ('offices',)
 
     service_id = fields.Int(dump_only=True)

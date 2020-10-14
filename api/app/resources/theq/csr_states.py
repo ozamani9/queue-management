@@ -14,7 +14,7 @@ limitations under the License.'''
 
 from flask import g
 from flask_restx import Resource
-from qsystem import api, db, oidc, time_print, get_key
+from qsystem import api, db, oidc, time_print
 from sqlalchemy import exc
 from app.models.theq import CSRState
 from app.schemas.theq import CSRStateSchema
@@ -31,7 +31,7 @@ class CsrStateList(Resource):
         try:
             user = g.oidc_token_info['username']
             has_role([Role.internal_user.value], g.oidc_token_info['realm_access']['roles'], user, "CsrStateList GET /csr_states/")
-            states = CSRState.query.all()
+            #states = CSRState.query.all()
             result = self.csr_state_schema.dump(states)
 
             return {'csr_states': result.data,
@@ -40,3 +40,10 @@ class CsrStateList(Resource):
         except exc.SQLAlchemyError as e:
             print(e)
             return {'message': 'API is down'}, 500
+
+try:
+    states = CSRState.query.all()
+except:
+    states = [1,"Active","Citizen is active, a ticket is being or has been created for them"]
+    print("==> In csr_states.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")

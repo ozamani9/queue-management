@@ -86,7 +86,7 @@ class CitizenLeft(Resource):
                                         current_sr_number= service_request.sr_number)
 
         my_print("    ++> Time before updating citizen state: " + str(datetime.now()))
-        citizen.cs = CitizenState.query.filter_by(cs_state_name='Left before receiving services').first()
+        citizen.cs = citizen_state
         if self.clear_comments_flag:
             citizen.citizen_comments = None
 
@@ -128,3 +128,9 @@ class CitizenLeft(Resource):
         else:
             citizen_ticket = "No citizen"
         return citizen_ticket
+try:
+    citizen_state = CitizenState.query.filter_by(cs_state_name='Left before receiving services').first()
+except:
+    citizen_state = [3,'','']
+    print("==> In smartboard.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")

@@ -35,10 +35,10 @@ class Smartboard(Resource):
             if not office:
                 return {'message': 'office_number could not be found.'}, 400
 
-            active_citizen_state = CitizenState.query.filter_by(cs_state_name="Active").first()
-
+            #active_citizen_state = CitizenState.query.filter_by(cs_state_name="Active").first()
+            cs_id = active_id
             citizens = Citizen.query.filter_by(office_id=office.office_id) \
-                .filter_by(cs_id=active_citizen_state.cs_id) \
+                .filter_by(cs_id) \
                 .join(ServiceReq, aliased=True)
 
             citizens_waiting = []
@@ -80,4 +80,10 @@ class Smartboard(Resource):
         except ValueError as e:
             print(e)
             return {'message': 'office_number must be an integer.'}, 400
-
+try:
+    citizen_state = CitizenState.query.filter_by(cs_state_name="Active").first()
+    active_id = citizen_state.cs_id
+except:
+    active_id = 1
+    print("==> In smartboard.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")

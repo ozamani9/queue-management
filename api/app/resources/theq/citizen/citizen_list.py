@@ -85,7 +85,6 @@ class CitizenList(Resource):
                 'errors': result.errors}, 201
 
 try:
-    key = get_key()
     citizen_state = CitizenState.query.filter_by(cs_state_name="Active").first()
     active_id = citizen_state.cs_id
 except:

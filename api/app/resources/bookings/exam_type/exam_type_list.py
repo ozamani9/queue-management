@@ -31,7 +31,7 @@ class ExamTypeList(Resource):
     def get(self):
 
         try:
-            exam_types = ExamType.query.order_by(asc(ExamType.exam_type_name))
+            #exam_types = ExamType.query.order_by(asc(ExamType.exam_type_name))
             result = self.exam_type_schema.dump(exam_types)
             return {'exam_types': result.data,
                     'errors': result.errors }, 200
@@ -39,3 +39,9 @@ class ExamTypeList(Resource):
         except exc.SQLAlchemyError as error:
             logging.error(error, exc_info=True)
             return {'message': 'API is down'}, 500
+try:
+    exam_types = ExamType.query.order_by(asc(ExamType.exam_type_name))
+except:
+    exam_types = 1
+    print("==> In exam_type_list.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")

@@ -93,8 +93,8 @@ class AppointmentPost(Resource):
 
         citizen.office_id = office_id
         citizen.qt_xn_citizen_ind = 0
-        citizen_state = CitizenState.query.filter_by(cs_state_name="Appointment booked").first()
-        citizen.cs_id = citizen_state.cs_id
+        #citizen_state = CitizenState.query.filter_by(cs_state_name="Appointment booked").first()
+        citizen.cs_id = active_id
         citizen.start_time = datetime.now()
         citizen.service_count = 1
 
@@ -157,3 +157,10 @@ class AppointmentPost(Resource):
 
         else:
             return {"The Appointment Office ID and CSR Office ID do not match!"}, 403
+try:
+    citizen_state = CitizenState.query.filter_by(cs_state_name="Appointment booked").first()
+    active_id = citizen_state.cs_id
+except:
+    active_id = 1
+    print("==> In appointment_post.py")
+    print("    --> NOTE!!  You should only see this if doing a 'python3 manage.py db upgrade'")
