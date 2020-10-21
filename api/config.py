@@ -204,6 +204,10 @@ class BaseConfig(object):
     # Cache timeout
     CACHE_DEFAULT_TIMEOUT = int(os.getenv('CACHE_DEFAULT_TIMEOUT', '300'))
 
+    # SocketIO timeout
+    SOCKETIO_PING_INTERVAL = int(os.getenv('SOCKETIO_PING_INTERVAL', '25'))
+    SOCKETIO_PING_TIMEOUT = int(os.getenv('SOCKETIO_PING_TIMEOUT', '60'))
+
 
 class LocalConfig(BaseConfig):
     DEBUG = True

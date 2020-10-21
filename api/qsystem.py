@@ -65,9 +65,10 @@ cache = Cache(config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': applicati
 cache.init_app(application)
 
 ma = Marshmallow(application)
-
+p_timeout = application.config['SOCKETIO_PING_TIMEOUT']
+p_interval = application.config['SOCKETIO_PING_INTERVAL']
 #   Set up socket io and rabbit mq.
-socketio = SocketIO(logger=socket_flag, engineio_logger=engine_flag,ping_timeout=6,ping_interval=3,
+socketio = SocketIO(logger=socket_flag, engineio_logger=engine_flag,ping_timeout=p_timeout,ping_interval=p_interval,
                     cors_allowed_origins=application.config['CORS_ALLOWED_ORIGINS'])
 
 if application.config['ACTIVE_MQ_URL'] is not None:
