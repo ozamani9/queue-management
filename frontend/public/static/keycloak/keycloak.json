@@ -1,6 +1,6 @@
 {
   "realm": "registry",
-  "auth-server-url": "http://localhost:8085/auth",
+  "auth-server-url": "https://dev.oidc.gov.bc.ca/auth",
   "ssl-required": "external",
   "resource": "account",
   "credentials": {
