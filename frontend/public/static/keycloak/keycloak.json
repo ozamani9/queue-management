@@ -1,10 +1,9 @@
 {
-  "realm": "vtkayq4c",
-  "auth-server-url": "https://dev.oidc.gov.bc.ca/auth",
+  "realm": "registry",
+  "auth-server-url": "http://localhost:8085/auth",
   "ssl-required": "external",
-  "resource": "online-appointment-web",
+  "resource": "account",
   "credentials": {
-      "secret": "c2c468d4-38b8-4518-a6f1-d9d5e39913eb"
-  },
-  "confidential-port": 0
+    "secret": "5abdcb03-9dc6-4789-8c1f-8230c7d7cb79"
+  }
 }
