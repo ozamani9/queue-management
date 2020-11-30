@@ -194,19 +194,33 @@ export default {
         service_id: payload.service_id,
         citizen_name: payload.title
       }
+      const citizen_id: number = payload.citizen_id
       payload.start_time = data.checked_in_time
       payload.snowplow_addcitizen = true
-      return new Promise((resolve, reject) => {
-        Axios({ state }).put(`/appointments/${payload.appointment_id}/`, data).then(() => {
-          if (state.officeType != 'nocallonsmartboard') {
-            dispatch('sendToQueue', payload)
-            setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
-            resolve()
-          } else {
-            dispatch('sendToService', payload)
-            setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
-            resolve()
-          }
+      commit('setAppointmentsStateInfo', payload, { root: true })
+      dispatch('putCitizen', { citizen_id, payload }).then(() => {
+        dispatch('postServiceReq', { citizen_id, payload }).then(() => {
+            return new Promise((resolve, reject) => {
+              Axios({ state }).put(`/appointments/${payload.appointment_id}/`, data).then(() => {
+                if (state.officeType !== 'nocallonsmartboard') {
+                  dispatch('postAddToQueue', citizen_id).then(() => {
+                    dispatch('getAppointments').then(() => {
+                      commit('toggleCheckInModal', false)
+                    })
+                  })
+                  setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
+                  resolve()
+                } else {
+                  dispatch('postBeginService', citizen_id).then(() => {
+                    dispatch('getAppointments').then(() => {
+                      commit('toggleCheckInModal', false)
+                    })
+                  })
+                  setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
+                  resolve()
+                }
+              })
+            })
         })
       })
     },
@@ -269,7 +283,6 @@ export default {
         start_time: payload.start_time,
         snowplow_addcitizen: payload.snowplow_addcitizen
       }
-
       return new Promise((resolve, reject) => {
         const state = rootState
         const url = `/citizens/${citizen_id}/`
