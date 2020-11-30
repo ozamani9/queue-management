@@ -196,18 +196,16 @@ export default {
       }
       payload.start_time = data.checked_in_time
       payload.snowplow_addcitizen = true
+      if (state.officeType != 'nocallonsmartboard') {
+        dispatch('sendToQueue', payload)
+      } else {
+        dispatch('sendToService', payload)
+      }
       return new Promise((resolve, reject) => {
         Axios({ state }).put(`/appointments/${payload.appointment_id}/`, data).then(() => {
-          if (state.officeType != 'nocallonsmartboard') {
-            dispatch('sendToQueue', payload)
             setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
             resolve()
-          } else {
-            dispatch('sendToService', payload)
-            setTimeout(() => { commit('toggleCheckInClicked', false) }, 2000)
-            resolve()
-          }
-        })
+          })
       })
     },
 
