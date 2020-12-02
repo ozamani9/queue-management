@@ -514,7 +514,7 @@ export const addExamModule = {
       {
         step: 2,
         title: 'Exam Info',
-        questions: [eventIdQ, examNameQ, examineeNameQ, examMethodQ]
+        questions: [officeSelectQ, eventIdQ, examNameQ, examineeNameQ, examMethodQ]
       },
       {
         step: 3,

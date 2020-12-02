@@ -38,7 +38,7 @@
       no-gutters
       align-h="between"
       align-v="end"
-      v-if="setup === 'group' || is_pesticide_designate"
+      v-if="setup === 'group' || setup === 'individual' || is_pesticide_designate"
     >
       <b-col cols="1" />
       <b-col cols="3">
@@ -269,7 +269,7 @@ export default class AddExamFinalStep extends Vue {
   @Getter('is_pesticide_designate') private is_pesticide_designate!: any;
 
   get officeName () {
-    if (this.addExamModal.setup === 'group' || this.addExamModal.setup === 'pesticide' && this.exam.office_id) {
+    if (this.addExamModal.setup === 'group' || this.addExamModal.setup === 'individual' || this.addExamModal.setup === 'pesticide' && this.exam.office_id) {
       const office = this.offices.find(o => o.office_id == this.exam.office_id)
       return `#${office.office_id} - ${office.office_name}`
     }

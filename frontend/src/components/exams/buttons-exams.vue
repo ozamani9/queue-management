@@ -2,7 +2,7 @@
   <div class="q-w100-flex-fs">
     <b-form inline>
       <b-dd
-        v-if="role_code === 'GA' || is_office_manager"
+        v-if="is_ita2_designate"
         id="add-ita"
         split
         class="mr-1"
@@ -14,13 +14,13 @@
           >Add Monthly Session Exam</b-dd-item
         >
       </b-dd>
-      <b-button
-        v-if="!(role_code === 'GA' || is_office_manager)"
+     <!--  <b-button
+        v-if="is_ita2_designate"
         id="add_ita"
         class="mr-1 btn-primary"
         @click="handleClick('individual')"
         >Add ITA Exam</b-button
-      >
+      > -->
       <b-button
         v-if="is_ita2_designate"
         id="add_group"
