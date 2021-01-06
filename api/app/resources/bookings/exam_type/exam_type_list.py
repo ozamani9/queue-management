@@ -17,7 +17,7 @@ from flask_restx import Resource
 from sqlalchemy import exc,asc
 from app.models.bookings import ExamType
 from app.schemas.bookings import ExamTypeSchema
-from qsystem import api, oidc
+from qsystem import api, oidc, my_print
 from app.utilities.auth_util import Role, has_any_role
 
 
@@ -31,7 +31,10 @@ class ExamTypeList(Resource):
     def get(self):
 
         try:
-            exam_types = ExamType.query.order_by(asc(ExamType.exam_type_name))
+            my_print("CALLING EXAM TYPES")
+            exam_types = ExamType.query.filter(ExamType.deleted.is_(None))
+            my_print(exam_types)
+            ## exam_types = ExamType.query.filter(ExamType.deleted.is_(None)).order_by(asc(ExamType.exam_type_name))
             result = self.exam_type_schema.dump(exam_types)
             return {'exam_types': result.data,
                     'errors': result.errors }, 200

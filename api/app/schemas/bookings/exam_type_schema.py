@@ -36,5 +36,6 @@ class ExamTypeSchema(ma.SQLAlchemySchema):
     ita_ind = fields.Int()
     group_exam_ind = fields.Int()
     pesticide_exam_ind = fields.Int()
+    deleted = fields.Str()
 
 
