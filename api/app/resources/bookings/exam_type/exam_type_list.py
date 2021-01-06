@@ -31,10 +31,7 @@ class ExamTypeList(Resource):
     def get(self):
 
         try:
-            my_print("CALLING EXAM TYPES")
-            exam_types = ExamType.query.filter(ExamType.deleted.is_(None))
-            my_print(exam_types)
-            ## exam_types = ExamType.query.filter(ExamType.deleted.is_(None)).order_by(asc(ExamType.exam_type_name))
+            exam_types = ExamType.query.filter(ExamType.deleted.is_(None)).order_by(asc(ExamType.exam_type_name))
             result = self.exam_type_schema.dump(exam_types)
             return {'exam_types': result.data,
                     'errors': result.errors }, 200
