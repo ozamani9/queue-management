@@ -13,7 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.'''
 
 from marshmallow import fields, post_dump
-import toastedmarshmallow
 from app.models.bookings import Booking
 from app.schemas.bookings import RoomSchema, InvigilatorSchema
 from app.schemas.theq import OfficeSchema
@@ -25,7 +24,6 @@ class BookingSchema(ma.SQLAlchemySchema):
         model = Booking
         include_relationships = True
         load_instance = True
-        jit = toastedmarshmallow.Jit
 
     booking_id = fields.Int(dump_only=True)
     booking_name = fields.Str()

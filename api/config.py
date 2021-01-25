@@ -59,8 +59,6 @@ class BaseConfig(object):
         amq_port=ACTIVE_MQ_PORT
     )
 
-
-    MARSHMALLOW_SCHEMA_DEFAULT_JIT = "toastedmarshmallow.Jit"
     DB_LONG_RUNNING_QUERY = float(os.getenv("DATABASE_LONG_RUNNING_QUERY", '0.5'))
 
     DB_ENGINE = os.getenv('DATABASE_ENGINE', '')

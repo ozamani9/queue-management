@@ -12,7 +12,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.'''
 
-import toastedmarshmallow
 from marshmallow import fields
 from app.models.theq import Citizen
 from app.schemas.theq import ServiceReqSchema, CitizenStateSchema, OfficeSchema
@@ -25,7 +24,6 @@ class CitizenSchema(ma.SQLAlchemySchema):
         model = Citizen
         include_relationships = True
         load_instance = True
-        jit = toastedmarshmallow.Jit
 
     citizen_id = fields.Int(dump_only=True)
     citizen_name = fields.Str()
