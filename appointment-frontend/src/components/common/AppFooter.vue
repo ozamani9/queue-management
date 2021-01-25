@@ -11,6 +11,7 @@
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
+          <li><a href="#" @click="callSnowPlow('https://www2.gov.bc.ca/gov/content/home/disclaimer')" id="disclaimer">TESTING</a></li>
           <li><a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
           <li><a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
           <li><a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
@@ -27,6 +28,13 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class AppFooter extends Vue {
+  callSnowPlow (item) {
+    // eslint-disable-next-line no-console
+    console.log('callSnowPlow from App footer')
+    // eslint-disable-next-line no-console
+    console.log('HELLO FOOTER', item)
+    window.open(item)
+  }
 }
 </script>
 

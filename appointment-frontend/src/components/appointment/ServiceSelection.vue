@@ -28,7 +28,7 @@
                 class="service-selection-options"
               >
                 <div>{{ data.item.external_service_name }}</div>
-                <div v-if="data.item.online_link" class="service-link" :class="{'service-link-mobile': $vuetify.breakpoint.xs}" @click="goToServiceLink(data.item.online_link)">
+                <div v-if="data.item.online_link" class="service-link" :class="{'service-link-mobile': $vuetify.breakpoint.xs}" @click="goToServiceLink(data.item.online_link, data.item.external_service_name)">
                   Online Option <v-icon small>mdi-open-in-new</v-icon>
                 </div>
               </div>
@@ -123,6 +123,7 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Vue } from 'vue-property-decorator'
 import { mapActions, mapMutations, mapState } from 'vuex'
+import { CustomWindow } from '@/models/CustomWindow'
 import { Office } from '@/models/office'
 import { Service } from '@/models/service'
 import { ServiceAvailability } from '@/utils/constants'
@@ -165,6 +166,7 @@ export default class ServiceSelection extends Mixins(StepperMixin) {
   private textCharsLeft = this.textCharsPrefix + this.charsLeft + this.textCharsSuffix
   private keyPressed = true
   private myMessage = ''
+  private window: CustomWindow;
 
   private otherBookingOptionModel = false
 
@@ -175,6 +177,8 @@ export default class ServiceSelection extends Mixins(StepperMixin) {
       }
       this.selectedService = (!this.checkDisabled(this.currentService)) ? this.currentService : null
       this.additionalOptions = this.additionalNotes || ''
+      console.log('Loading the Service Selection Modal')
+      // this.window.snowplow('trackPageView')
     }
   }
 
@@ -232,7 +236,25 @@ export default class ServiceSelection extends Mixins(StepperMixin) {
     return (value?.online_availability === ServiceAvailability.DISABLE)
   }
 
-  private goToServiceLink (url) {
+  private goToServiceLink (url, sn) {
+    // eslint-disable-next-line no-console
+    console.log('goToServiceLink - this.currentOffice')
+    // eslint-disable-next-line no-console
+    console.log(this.currentOffice?.office_name)
+    // eslint-disable-next-line no-console
+    console.log('goToServiceLink - this.selectedService.service_name')
+    // eslint-disable-next-line no-console
+    console.log(sn)
+    /* window.snowplow('selfDescribingEvent', {
+      schema: 'iglu:ca.bc.gov.cfmspoc/appointment_click/jsonschema/1-0-0',
+      data: {
+        label: 'Online Option',
+        step: 'Service Selection',
+        location: this.currentOffice?.office_name,
+        service: this.selectedService.external_service_name,
+        url: url
+      }
+    }) */
     window.open(url, '_blank')
   }
 

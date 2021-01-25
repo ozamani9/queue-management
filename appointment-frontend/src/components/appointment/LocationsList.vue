@@ -128,8 +128,9 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Vue } from 'vue-property-decorator'
 import { GeoModule, OfficeModule } from '@/store/modules'
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 import ConfigHelper from '@/utils/config-helper'
+import { CustomWindow } from '@/models/CustomWindow'
 import GeocoderInput from './GeocoderInput.vue'
 import GeocoderService from '@/services/geocoder.services'
 import { Office } from '@/models/office'
@@ -146,6 +147,9 @@ import { getModule } from 'vuex-module-decorators'
   computed: {
     ...mapState('office', [
       'currentOffice'
+    ]),
+    ...mapGetters('auth', [
+      'isAuthenticated'
     ])
   },
   methods: {
@@ -175,8 +179,10 @@ export default class LocationsList extends Mixins(StepperMixin) {
   private readonly setCurrentOffice!: (office: Office) => void
   private readonly setCurrentService!: (service: Service) => void
   private readonly currentOffice!: Office
+  private readonly isAuthenticated!: boolean
   // private readonly coords!: () => any;
   private readonly currentCoordinates!: () => any;
+  private window: CustomWindow;
 
   private selectedRadius = null
   private radiusList = [2, 4, 6, 10]
@@ -191,6 +197,11 @@ export default class LocationsList extends Mixins(StepperMixin) {
   }
 
   private async mounted () {
+    // eslint-disable-next-line no-console
+    console.log('Loading the Locations List Modal')
+    // eslint-disable-next-line no-console
+    console.log(this.isAuthenticated)
+    //this.window.snowplow('trackPageView')
     if (this.isOnCurrentStep) {
       this.locationListData = await this.getOffices()
       this.locationListData = this.locationListData.filter(location => location.online_status !== 'Status.HIDE')

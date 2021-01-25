@@ -132,6 +132,8 @@ export default class DateSelection extends Mixins(StepperMixin) {
        this.selectedDate = CommonUtils.getTzFormattedDate(this.currentAppointmentSlot?.start_time, this.currentOfficeTimezone)
        this.dateClicked()
      }
+     console.log('Loading the Date Selection Modal')
+     // window.snowplow('trackPageView')
    }
 
    private async getAvailableService () {

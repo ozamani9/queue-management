@@ -19,6 +19,7 @@
           min-width="150"
           large class="create-bceid"
           color="primary"
+          @click="createBCeID()"
         >
         Create BCeID
         </v-btn>
@@ -73,6 +74,10 @@ export default class LoginToConfirm extends Mixins(StepperMixin) {
   private readonly currentUserProfile!: User
   @Prop({ default: false }) isStepperView: boolean
 
+  private async mounted () {
+    console.log('Loading the Login to Confirm Modal')
+    // window.snowplow('trackPageView')
+  }
   private get description () {
     return (this.isStepperView)
       ? `To complete your appointment booking, please login using one of the following`
@@ -80,8 +85,27 @@ export default class LoginToConfirm extends Mixins(StepperMixin) {
   }
 
   private login (idpHint) {
+    // (window as any).snowplow('trackPageView')
+    // eslint-disable-next-line no-console
+    console.log('Login to BCEID or BC Services Card - idpHint')
+    // eslint-disable-next-line no-console
+    console.log(this.idpHint)
     this.$router.push(`/signin/${idpHint}`)
     // this.stepNext()
+  }
+
+  createBCeID () {
+    // (window as any).snowplow('trackPageView')
+    // eslint-disable-next-line no-console
+    console.log('HOW COME I DONT SEE THIS')
+    // eslint-disable-next-line no-console
+    console.log('*******************  Create BCEID')
+    // eslint-disable-next-line no-console
+    console.log('*******************  Create BCEID')
+    // eslint-disable-next-line no-console
+    console.log('*******************  Create BCEID')
+    // eslint-disable-next-line no-console
+    console.log('*******************  Create BCEID')
   }
 
   private get hideBCServicesCard (): boolean {

@@ -147,6 +147,15 @@ export default class AppointmentBookingView extends Vue {
   }
 
   private stepNext () {
+    // (window as any).snowplow('trackPageView')
+    // eslint-disable-next-line no-console
+    console.log('Appointment Booking View step next, stepcounter, updateViewCounter, TITLE')
+    // eslint-disable-next-line no-console
+    console.log(this.stepCounter)
+    // eslint-disable-next-line no-console
+    console.log(this.updateViewCounter)
+    // eslint-disable-next-line no-console
+    console.log(this.bookingSteppers[this.stepCounter].title)
     this.updateViewCounter++
     if (this.stepCounter < this.bookingSteppers.length) {
       this.stepCounter++

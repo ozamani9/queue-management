@@ -181,6 +181,11 @@ export default class AppointmentSummary extends Mixins(StepperMixin) {
     subTitle: ''
   }
 
+  private async mounted () {
+    console.log('Loading the Appointment Summary Modal')
+    // window.snowplow('trackPageView')
+  }
+
   private get appointmentDisplayData () {
     return {
       serviceForAppointment: this.currentService?.external_service_name,
