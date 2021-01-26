@@ -39,7 +39,7 @@ class BookingSchema(ma.SQLAlchemySchema):
     blackout_notes = fields.Str(allow_none=True)
     recurring_uuid = fields.Str(allow_none=True)
 
-    room = fields.Nested(RoomSchema(exclude=("booking", "office",)))
+    room = fields.Nested(RoomSchema(exclude=("office",)))
     office = fields.Nested(OfficeSchema(only=('appointments_enabled_ind', 'exams_enabled_ind', 'office_id',
                                               'office_name', 'office_number', 'timezone')))
 

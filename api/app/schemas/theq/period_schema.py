@@ -35,5 +35,5 @@ class PeriodSchema(ma.SQLAlchemySchema):
     ps = fields.Nested(PeriodStateSchema(exclude=('ps_id', 'ps_desc', 'ps_number',)))
     sr = fields.Nested("ServiceReqSchema", exclude=('periods',))
     csr = fields.Nested(CSRSchema(exclude=('csr_id', 'csr_state', 'csr_state_id', 'deleted', 'office', 'office_id',
-                                           'periods', 'receptionist_ind', 'role', 'role_id', 'finance_designate',
+                                           'receptionist_ind', 'role', 'role_id', 'finance_designate',
                                            'office_manager', 'ita2_designate', 'pesticide_designate', 'counter')))
