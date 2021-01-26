@@ -35,7 +35,7 @@ class CSRSchema(ma.SQLAlchemySchema):
     csr_state_id = fields.Int()
     counter_id = fields.Int()
     counter = fields.Int(attribute="counter_id")
-    csr_state = fields.Nested(CSRStateSchema(exclude=('csrs',)),many=False)
+    csr_state = fields.Nested(CSRStateSchema())
     office = fields.Nested(OfficeSchema())
     role = fields.Nested(RoleSchema(exclude=('roles',)))
     office_manager = fields.Int()
