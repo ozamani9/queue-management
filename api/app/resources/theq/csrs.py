@@ -28,7 +28,7 @@ from app.utilities.auth_util import Role, has_any_role
 @api.route("/csrs/", methods=["GET"])
 class CsrList(Resource):
 
-    csr_schema = CSRSchema(many=True, exclude=('office', 'periods',))
+    csr_schema = CSRSchema(many=True, exclude=('office',))
 
     @oidc.accept_token(require_token=True)
     @has_any_role(roles=[Role.internal_user.value])

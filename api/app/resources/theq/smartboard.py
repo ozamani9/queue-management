@@ -24,7 +24,7 @@ from sqlalchemy import exc
 @api.route("/smartboard/", methods=["GET"])
 class Smartboard(Resource):
 
-    period_schema = PeriodSchema(exclude=('csr', 'csr_id', 'reception_csr_ind', 'request_periods', 'sr', 'sr_id',))
+    period_schema = PeriodSchema(exclude=('csr', 'csr_id', 'reception_csr_ind', 'sr', 'sr_id',))
 
     def get(self):
         try:

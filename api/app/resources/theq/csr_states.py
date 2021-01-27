@@ -24,7 +24,7 @@ from app.utilities.auth_util import Role, has_any_role, has_role
 @api.route("/csr_states/", methods=["GET"])
 class CsrStateList(Resource):
 
-    csr_state_schema = CSRStateSchema(many=True, exclude=('csrs'))
+    csr_state_schema = CSRStateSchema(many=True)
 
     @oidc.accept_token(require_token=True)
     def get(self):

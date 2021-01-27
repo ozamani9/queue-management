@@ -34,7 +34,7 @@ class CSRSchema(ma.SQLAlchemySchema):
     deleted = fields.DateTime()
     csr_state_id = fields.Int()
     counter_id = fields.Int()
-    counter = fields.Int(attribute="counter_id")
+    counter = fields.Int(attribute="counter_id",dump_only=True)
     csr_state = fields.Nested(CSRStateSchema())
     office = fields.Nested(OfficeSchema())
     role = fields.Nested(RoleSchema())
