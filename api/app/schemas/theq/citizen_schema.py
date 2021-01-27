@@ -35,6 +35,6 @@ class CitizenSchema(ma.SQLAlchemySchema):
     start_time = fields.DateTime()
     accurate_time_ind = fields.Int()
     service_reqs = fields.Nested(ServiceReqSchema(exclude=('citizen',)), many=True)
-    cs = fields.Nested(CitizenStateSchema(exclude=('cs_state_desc', 'cs_id', 'citizens', 'state_citizens')))
+    cs = fields.Nested(CitizenStateSchema(exclude=('cs_state_desc', 'cs_id',)))
     priority = fields.Int()
     user_id = fields.Int()
