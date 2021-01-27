@@ -25,9 +25,9 @@ gunicorn==20.0.4
 marshmallow-sqlalchemy==0.23.1 # 0.24 was breaking
 minio<6
 psycopg2-binary==2.8.6
-pysnow
+pysnow==0.7.16
 pytest==6.1.2
-pytz==2020.4
+pytz==2019.3
 python-dotenv==0.15.0
 python-jose==3.2.0
 SQLAlchemy-Utc==0.11.0
