@@ -183,7 +183,10 @@ export default class AgendaScreen extends Vue {
       }
       return false;
     })
-
+    if (this.$store.state.services.length === 0) {
+      console.log('there are no services we need to call fetch again',this.$store.state.services.length)
+      this.fetch()  
+    }
     // Format object for agenda table.
     return filteredDates.map(appt => {
       const service = this.$store.state.services
